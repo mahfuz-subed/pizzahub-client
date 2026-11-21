@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import PizzeriaIllustration from "@/components/home/pizzeria-illustration"
+import { FadeIn } from "@/components/shared/fade-in"
 
 /** The primary call-to-action style, shared with the navbar buttons. */
 const buttonLinkClasses =
@@ -12,7 +13,7 @@ export default function Banner() {
     <section className="border-b border-border">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:px-8 lg:py-24">
         {/* Text side */}
-        <div>
+        <FadeIn>
           <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-secondary">
             <span className="size-2 rounded-full bg-secondary" />
             Your neighborhood pizzeria
@@ -37,15 +38,15 @@ export default function Banner() {
               No account needed to browse.
             </p>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Illustration side */}
-        <div className="relative mx-auto w-full max-w-lg">
+        <FadeIn delay={0.15} className="relative mx-auto w-full max-w-lg">
           <div className="absolute inset-x-6 bottom-4 h-10 rounded-full bg-secondary/20 blur-xl" />
           <div className="relative overflow-hidden rounded-3xl border border-border bg-secondary/10 p-4 sm:p-6">
             <PizzeriaIllustration className="h-auto w-full rounded-2xl" />
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
   )
