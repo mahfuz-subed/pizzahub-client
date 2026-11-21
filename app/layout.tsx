@@ -1,11 +1,12 @@
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google"
+import { Toaster } from "react-hot-toast"
 
 import "./globals.css"
 import Navbar from "@/components/navbar"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'})
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           <main>{children}</main>
+          <Toaster position="top-center" />
         </ThemeProvider>
       </body>
     </html>

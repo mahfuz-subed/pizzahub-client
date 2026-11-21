@@ -5,50 +5,50 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-display);
-    --font-sans: var(--font-sans);
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
+  --font-heading: var(--font-display);
+  --font-sans: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
-    /*
+  /*
      * Brand palette (Basil & Saffron) - the single place to change colors.
      * Basil Green #1F5F4A  -> --primary        (buttons, logo, active links)
      * Saffron     #F28C28  -> --secondary      (badges, accents, logo dot)
@@ -57,106 +57,110 @@
      *
      * White text on basil and dark text on saffron both pass contrast.
      */
-    --background: #faf6ec;
-    --foreground: #1e2a24;
+  --background: #faf6ec;
+  --foreground: #1e2a24;
 
-    --card: #ffffff;
-    --card-foreground: #1e2a24;
+  --card: #ffffff;
+  --card-foreground: #1e2a24;
 
-    --popover: #ffffff;
-    --popover-foreground: #1e2a24;
+  --popover: #ffffff;
+  --popover-foreground: #1e2a24;
 
-    --primary: #1f5f4a;
-    --primary-foreground: #ffffff;
+  --primary: #1f5f4a;
+  --primary-foreground: #ffffff;
 
-    --secondary: #f28c28;
-    --secondary-foreground: #2b1b14;
+  --secondary: #f28c28;
+  --secondary-foreground: #2b1b14;
 
-    --muted: #e6dfce;
-    --muted-foreground: #6b6255;
+  --muted: #e6dfce;
+  --muted-foreground: #6b6255;
 
-    --accent: #e6dfce;
-    --accent-foreground: #1e2a24;
+  --accent: #e6dfce;
+  --accent-foreground: #1e2a24;
 
-    /* A true red for errors, kept separate from the warm saffron accent. */
-    --destructive: #c1121f;
+  /* A true red for errors, kept separate from the warm saffron accent. */
+  --destructive: #c1121f;
 
-    --border: #e6dfce;
-    --input: #e6dfce;
-    --ring: #f28c28;
+  --border: #e6dfce;
+  --input: #e6dfce;
+  --ring: #f28c28;
 
-    --chart-1: #1f5f4a;
-    --chart-2: #f28c28;
-    --chart-3: #d9772a;
-    --chart-4: #6b6255;
-    --chart-5: #a89e8b;
+  --chart-1: #1f5f4a;
+  --chart-2: #f28c28;
+  --chart-3: #d9772a;
+  --chart-4: #6b6255;
+  --chart-5: #a89e8b;
 
-    --radius: 0.75rem;
+  --radius: 0.75rem;
 
-    --sidebar: #ffffff;
-    --sidebar-foreground: #1e2a24;
-    --sidebar-primary: #1f5f4a;
-    --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #e6dfce;
-    --sidebar-accent-foreground: #1e2a24;
-    --sidebar-border: #e6dfce;
-    --sidebar-ring: #f28c28;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1e2a24;
+  --sidebar-primary: #1f5f4a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6dfce;
+  --sidebar-accent-foreground: #1e2a24;
+  --sidebar-border: #e6dfce;
+  --sidebar-ring: #f28c28;
 }
 
 /* Dark counterpart: deep green base with a lighter basil for text/buttons. */
 .dark {
-    --background: #121a17;
-    --foreground: #faf6ec;
+  --background: #121a17;
+  --foreground: #faf6ec;
 
-    --card: #1f2a25;
-    --card-foreground: #faf6ec;
+  --card: #1f2a25;
+  --card-foreground: #faf6ec;
 
-    --popover: #1f2a25;
-    --popover-foreground: #faf6ec;
+  --popover: #1f2a25;
+  --popover-foreground: #faf6ec;
 
-    /* Lighter basil keeps buttons and logo readable on the dark background. */
-    --primary: #7fd1ae;
-    --primary-foreground: #10241b;
+  /* Lighter basil keeps buttons and logo readable on the dark background. */
+  --primary: #7fd1ae;
+  --primary-foreground: #10241b;
 
-    --secondary: #f28c28;
-    --secondary-foreground: #2b1b14;
+  --secondary: #f28c28;
+  --secondary-foreground: #2b1b14;
 
-    --muted: #24312b;
-    --muted-foreground: #bfcfc4;
+  --muted: #24312b;
+  --muted-foreground: #bfcfc4;
 
-    --accent: #24312b;
-    --accent-foreground: #faf6ec;
+  --accent: #24312b;
+  --accent-foreground: #faf6ec;
 
-    --destructive: #f87171;
+  --destructive: #f87171;
 
-    --border: #324139;
-    --input: #324139;
-    --ring: #f28c28;
+  --border: #324139;
+  --input: #324139;
+  --ring: #f28c28;
 
-    --chart-1: #7fd1ae;
-    --chart-2: #f28c28;
-    --chart-3: #f5b06b;
-    --chart-4: #bfcfc4;
-    --chart-5: #7e8f84;
+  --chart-1: #7fd1ae;
+  --chart-2: #f28c28;
+  --chart-3: #f5b06b;
+  --chart-4: #bfcfc4;
+  --chart-5: #7e8f84;
 
-    --sidebar: #1f2a25;
-    --sidebar-foreground: #faf6ec;
-    --sidebar-primary: #7fd1ae;
-    --sidebar-primary-foreground: #10241b;
-    --sidebar-accent: #24312b;
-    --sidebar-accent-foreground: #faf6ec;
-    --sidebar-border: #324139;
-    --sidebar-ring: #f28c28;
+  --sidebar: #1f2a25;
+  --sidebar-foreground: #faf6ec;
+  --sidebar-primary: #7fd1ae;
+  --sidebar-primary-foreground: #10241b;
+  --sidebar-accent: #24312b;
+  --sidebar-accent-foreground: #faf6ec;
+  --sidebar-border: #324139;
+  --sidebar-ring: #f28c28;
 }
-
+h1,
+h2,
+h3 {
+  @apply font-heading;
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
   html {
     @apply font-sans;
-    }
+  }
 }
