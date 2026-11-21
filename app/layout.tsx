@@ -2,7 +2,8 @@ import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google"
 import { Toaster } from "react-hot-toast"
 
 import "./globals.css"
-import Navbar from "@/components/navbar"
+import Navbar from "@/components/shared/navbar"
+import Footer from "@/components/shared/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
@@ -38,8 +39,11 @@ export default function RootLayout({
     >
       <body className="min-h-svh">
         <ThemeProvider>
-          <Navbar />
-          <main>{children}</main>
+          <div className="flex min-h-svh flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
           <Toaster position="top-center" />
         </ThemeProvider>
       </body>
