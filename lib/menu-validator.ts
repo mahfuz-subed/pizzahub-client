@@ -5,6 +5,8 @@ export function getMenuItemError(values: {
   price: number
   location: string
   imageFile: File | null
+  // Create requires an image; Edit does not (it can keep the current one).
+  requireImage?: boolean
 }): string | null {
   if (values.itemName.trim().length < 3) {
     return "Item name must be at least 3 characters."
@@ -18,7 +20,10 @@ export function getMenuItemError(values: {
   if (values.location.trim().length < 2) {
     return "Please enter the location (area or city)."
   }
-  if (!values.imageFile || values.imageFile.size === 0) {
+  if (
+    (values.requireImage ?? true) &&
+    (!values.imageFile || values.imageFile.size === 0)
+  ) {
     return "Please upload an item image."
   }
   return null

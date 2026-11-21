@@ -21,22 +21,33 @@ import { MENU_CATEGORIES } from "@/lib/menu-items"
 import type { MenuCategory, NewMenuItem } from "@/lib/menu-items"
 import { uploadImage } from "@/lib/upload-img"
 import { getMenuItemError } from "@/lib/menu-validator"
+import { authClient } from "@/lib/auth-client"
 
 export function AddMenuItemForm() {
   const [category, setCategory] = useState<MenuCategory>(MENU_CATEGORIES[0])
   const [isLoading, setIsLoading] = useState(false)
-
+  const { data: session } = authClient.useSession()
+  const userId = session?.user?.id
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget // save it, we need it after the awaits below
 
     // Read the values typed into the form
     const formData = new FormData(form)
+
+    // We need a signed-in user so the item can be linked to the right vendor.
+    if (!userId) {
+      toast.error("Please sign in as a vendor to add a menu item.")
+      return
+    }
+
     const itemName = formData.get("itemName") as string
     const description = formData.get("description") as string
     const price = Number(formData.get("price"))
     const location = formData.get("location") as string
-    const imageFile = formData.get("image") as File
+    // Only a real file counts. An empty file input returns null here.
+    const imageFile = formData.get("image")
+    const file = imageFile instanceof File ? imageFile : null
 
     // Stop early if something is missing or invalid
     const validationError = getMenuItemError({
@@ -44,20 +55,23 @@ export function AddMenuItemForm() {
       description,
       price,
       location,
-      imageFile,
+      imageFile: file,
     })
     if (validationError) {
       toast.error(validationError)
       return
     }
+    // Helping TypeScript see what the validator already checked.
+    if (!file) return
 
     setIsLoading(true)
     try {
       // 1. Upload the picture and get its public URL
-      const imageUrl = await uploadImage(imageFile)
+      const imageUrl = await uploadImage(file)
 
       // 2. Build the data we will send to the server
       const newItem: NewMenuItem = {
+        vendorId: userId,
         itemName: itemName.trim(),
         category,
         description: description.trim(),
