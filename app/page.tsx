@@ -1,5 +1,6 @@
 import Banner from "@/components/home/banner"
 import FeaturedMenu from "@/components/home/featured-menu"
+import Testimonials from "@/components/home/testimonials"
 import WhyChooseUs from "@/components/home/why-choose-us"
 
 export default function Page() {
@@ -8,6 +9,7 @@ export default function Page() {
       <Banner />
       <FeaturedMenu />
       <WhyChooseUs />
+      <Testimonials />
     </>
   )
 }
