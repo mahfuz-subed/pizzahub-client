@@ -1,14 +1,14 @@
 import Link from "next/link"
 import { MapPin, Store } from "lucide-react"
 
-import type { MenuItemWithVendor } from "@/lib/menu-items"
+import type { MenuItem } from "@/lib/menu-items"
 
 // Same button style used on the banner and navbar.
 const buttonLinkClasses =
   "inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
 
 /** One public menu card. All the data it needs is passed in as a prop. */
-export default function MenuCard({ item }: { item: MenuItemWithVendor }) {
+export default function MenuCard({ item }: { item: MenuItem }) {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
       <div className="relative">
@@ -40,7 +40,7 @@ export default function MenuCard({ item }: { item: MenuItemWithVendor }) {
         <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
           <Store className="size-4 shrink-0 text-primary" />
           <span className="truncate">
-            {item.vendor?.businessName || item.vendor?.name || "Local vendor"}
+            {item.vendorBusinessName || item.vendorName || "Local vendor"}
           </span>
         </div>
 

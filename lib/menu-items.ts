@@ -15,6 +15,10 @@ export type MenuItemStatus = "pending" | "approved" | "rejected" | "inactive"
 // What the vendor form sends to the server
 export interface NewMenuItem {
   vendorId: string
+  // Copied from the session at create time, so public cards can show the vendor
+  // without a database join when reading.
+  vendorName: string
+  vendorBusinessName: string | null
   itemName: string
   category: MenuCategory
   description: string
@@ -43,17 +47,6 @@ export interface MenuItem extends NewMenuItem {
   vendorId: string
   status: MenuItemStatus
   createdAt: string
-}
-
-// Basic info about the vendor who owns an item
-export interface VendorInfo {
-  name: string
-  businessName: string | null
-}
-
-// A menu item together with its vendor's info (used on public pages)
-export interface MenuItemWithVendor extends MenuItem {
-  vendor: VendorInfo
 }
 
 // How many approved items one category has

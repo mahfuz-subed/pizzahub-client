@@ -72,6 +72,8 @@ export function AddMenuItemForm() {
       // 2. Build the data we will send to the server
       const newItem: NewMenuItem = {
         vendorId: userId,
+        vendorName: session!.user.name,
+        vendorBusinessName: session!.user.businessName ?? null,
         itemName: itemName.trim(),
         category,
         description: description.trim(),

@@ -4,14 +4,14 @@ import { ArrowRight } from "lucide-react"
 import MenuCard from "@/components/home/menu-card"
 import { FadeIn } from "@/components/shared/fade-in"
 import { getPublicMenuItems } from "@/lib/api/menu"
-import type { MenuItemWithVendor } from "@/lib/menu-items"
+import type { MenuItem } from "@/lib/menu-items"
 
 const linkButtonClasses =
   "inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-opacity hover:opacity-70"
 
 /** Homepage section showing up to 6 approved items. */
 export default async function FeaturedMenu() {
-  let items: MenuItemWithVendor[] = []
+  let items: MenuItem[] = []
 
   try {
     // The server already returns only approved items.
