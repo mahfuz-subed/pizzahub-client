@@ -48,7 +48,7 @@ export default function MenuCard({ item }: { item: MenuItem }) {
           <span className="text-lg font-bold text-primary">
             ${item.price.toFixed(2)}
           </span>
-          <Link href={`/menu/${item._id}`} className={buttonLinkClasses}>
+          <Link href={`/menu-details/${item._id}`} className={buttonLinkClasses}>
             View Details
           </Link>
         </div>

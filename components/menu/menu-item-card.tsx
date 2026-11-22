@@ -42,7 +42,7 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
 
         {/* mt-auto pushes the button to the bottom, so all cards line up */}
         <Link
-          href={`/menu/${item._id}`}
+          href={`/menu-details/${item._id}`}
           className={cn(buttonVariants(), "mt-auto w-full")}
         >
           View Details
