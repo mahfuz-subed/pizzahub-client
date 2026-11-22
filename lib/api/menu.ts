@@ -1,4 +1,4 @@
-import type { MenuItem } from "@/lib/menu-items"
+import type { MenuItem, MenuItemWithVendor } from "@/lib/menu-items"
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"
 
 export const getMyMenuItems = async (vendorId: string): Promise<MenuItem[]> => {
@@ -8,6 +8,18 @@ export const getMyMenuItems = async (vendorId: string): Promise<MenuItem[]> => {
 
   if (!res.ok) {
     throw new Error(`Could not load your menu items (status ${res.status}).`)
+  }
+  return res.json()
+}
+
+// Public items for the homepage and Browse Menu (server already filters to approved).
+export const getPublicMenuItems = async (): Promise<MenuItemWithVendor[]> => {
+  const res = await fetch(`${BASE_URL}/menu`, {
+    cache: "no-store", // always show the latest approvals / availability
+  })
+
+  if (!res.ok) {
+    throw new Error(`Could not load menu items (status ${res.status}).`)
   }
   return res.json()
 }
