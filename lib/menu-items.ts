@@ -55,3 +55,9 @@ export interface VendorInfo {
 export interface MenuItemWithVendor extends MenuItem {
   vendor: VendorInfo
 }
+
+// How many approved items one category has
+export interface CategoryCount {
+  _id: string // the category name ($group stores it under _id)
+  count: number
+}

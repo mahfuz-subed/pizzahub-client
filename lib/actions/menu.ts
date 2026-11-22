@@ -1,4 +1,8 @@
-import type { NewMenuItem, UpdateMenuItemInput } from "@/lib/menu-items"
+import type {
+  CategoryCount,
+  NewMenuItem,
+  UpdateMenuItemInput,
+} from "@/lib/menu-items"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"
 
@@ -34,7 +38,9 @@ export const updateMenu = async (id: string, data: UpdateMenuItemInput) => {
 
   const result = await res.json()
   if (!res.ok) {
-    throw new Error(result.error || result.message || "Could not update the item.")
+    throw new Error(
+      result.error || result.message || "Could not update the item."
+    )
   }
   return result
 }
@@ -48,7 +54,9 @@ export const deleteMenu = async (id: string, vendorId: string) => {
 
   const result = await res.json()
   if (!res.ok) {
-    throw new Error(result.error || result.message || "Could not delete the item.")
+    throw new Error(
+      result.error || result.message || "Could not delete the item."
+    )
   }
   return result
 }

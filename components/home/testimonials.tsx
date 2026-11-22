@@ -73,7 +73,8 @@ export default function Testimonials() {
           </div>
         </FadeIn>
 
-        {/* The padding leaves room for the previous / next buttons. */}
+        {/* On small screens the arrows sit below the cards; from sm up they
+            sit at the sides, so the wrapper needs padding for them. */}
         <div className="mx-auto mt-10 w-full max-w-5xl px-2 sm:px-12">
           <Carousel opts={{ align: "start", loop: true }}>
             <CarouselContent>
@@ -113,8 +114,16 @@ export default function Testimonials() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+
+            {/* Mobile: arrows in a row underneath the cards. */}
+            <div className="mt-6 flex justify-center gap-3 sm:hidden">
+              <CarouselPrevious className="static m-0" />
+              <CarouselNext className="static m-0" />
+            </div>
+
+            {/* Desktop: the default side positions, inside the wrapper padding. */}
+            <CarouselPrevious className="hidden sm:inline-flex" />
+            <CarouselNext className="hidden sm:inline-flex" />
           </Carousel>
         </div>
       </div>

@@ -1,4 +1,8 @@
-import type { MenuItem, MenuItemWithVendor } from "@/lib/menu-items"
+import type {
+  CategoryCount,
+  MenuItem,
+  MenuItemWithVendor,
+} from "@/lib/menu-items"
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"
 
 export const getMyMenuItems = async (vendorId: string): Promise<MenuItem[]> => {
@@ -20,6 +24,17 @@ export const getPublicMenuItems = async (): Promise<MenuItemWithVendor[]> => {
 
   if (!res.ok) {
     throw new Error(`Could not load menu items (status ${res.status}).`)
+  }
+  return res.json()
+}
+
+export const getCategoryCounts = async (): Promise<CategoryCount[]> => {
+  const res = await fetch(`${BASE_URL}/menu/categories`, {
+    cache: "no-store",
+  })
+
+  if (!res.ok) {
+    throw new Error(`Could not load categories (status ${res.status}).`)
   }
   return res.json()
 }
