@@ -1,5 +1,6 @@
 import { BrandLogo } from "@/components/shared/brand-logo"
 import { SignInForm } from "@/components/auth-forms/sign-in-form"
+import { Suspense } from "react"
 
 export default function SignInPage() {
   return (
@@ -18,7 +19,9 @@ export default function SignInPage() {
         </div>
 
         <div className="rounded-xl border bg-card p-6 text-card-foreground shadow-sm sm:p-9">
-          <SignInForm />
+          <Suspense>
+            <SignInForm />
+          </Suspense>
         </div>
       </div>
     </section>

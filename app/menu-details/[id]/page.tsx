@@ -16,14 +16,12 @@ const MenuDetailsPage = async ({
 }: {
   params: Promise<{ id: string }>
 }) => {
-  // 1. Only logged-in users can open this page
+  const { id } = await params
+
   const session = await auth.api.getSession({ headers: await headers() })
   if (!session) {
-    redirect("/sign-in")
+    redirect(`/sign-in?redirectTo=/menu-details/${id}`)
   }
-
-  // 2. Get the id from the address (/menu/123 -> "123")
-  const { id } = await params
 
   // 3. Load the item from the server
   let item: MenuItem | null = null

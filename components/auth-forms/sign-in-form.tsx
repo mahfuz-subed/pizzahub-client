@@ -3,7 +3,7 @@
 import { useState } from "react"
 import type { FormEvent } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "react-hot-toast"
 import { Loader2 } from "lucide-react"
 
@@ -22,7 +22,9 @@ import type { Role } from "@/lib/roles"
 export function SignInForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-
+  const searchParams = useSearchParams()
+  // Keep this null when absent, so role-based redirect still has a chance.
+  const redirectTo = searchParams.get("redirectTo")
   async function handleSignIn(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
@@ -52,14 +54,14 @@ export function SignInForm() {
 
     // Send each person to the dashboard that matches their role
     const role = (data.user.role as Role) || "customer"
-    router.push(getDashboardPath(role))
+    router.push(redirectTo || getDashboardPath(role))
     router.refresh()
   }
 
   async function handleGoogleSignIn() {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: redirectTo || "/",
     })
   }
 
