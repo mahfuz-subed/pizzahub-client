@@ -22,12 +22,15 @@ import type { MenuCategory, NewMenuItem } from "@/lib/menu-items"
 import { uploadImage } from "@/lib/upload-img"
 import { getMenuItemError } from "@/lib/menu-validator"
 import { authClient } from "@/lib/auth-client"
+import { getMenuCount } from "@/lib/api/menu"
+import { useRouter } from "next/navigation"
 
 export function AddMenuItemForm() {
   const [category, setCategory] = useState<MenuCategory>(MENU_CATEGORIES[0])
   const [isLoading, setIsLoading] = useState(false)
   const { data: session } = authClient.useSession()
   const userId = session?.user?.id
+  const router = useRouter()
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget // save it, we need it after the awaits below
@@ -41,6 +44,11 @@ export function AddMenuItemForm() {
       return
     }
 
+    const result = await getMenuCount(`vendorId=${userId}`)
+    if (result.count >= 3) {
+      router.push("/payment")
+      return
+    }
     const itemName = formData.get("itemName") as string
     const description = formData.get("description") as string
     const price = Number(formData.get("price"))

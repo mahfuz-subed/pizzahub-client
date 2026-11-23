@@ -9,6 +9,14 @@ export const getMenu = async (query = ""): Promise<MenuItem[]> => {
   }
   return res.json()
 }
+export const getMenuCount = async (query = ""): Promise<{ count: number }> => {
+  const res = await fetch(`${BASE_URL}/add-menu/count?${query}`)
+
+  if (!res.ok) {
+    throw new Error(`Could not load the menu (status ${res.status}).`)
+  }
+  return res.json()
+}
 
 export const getMenuItem = async (id: string): Promise<MenuItem | null> => {
   const res = await fetch(`${BASE_URL}/menuDetails/${id}`)
