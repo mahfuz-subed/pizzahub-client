@@ -71,15 +71,18 @@ export function VendorMenuActions({ item, vendorId }: VendorMenuActionsProps) {
     const description = formData.get("description") as string
     const price = Number(formData.get("price"))
     const location = formData.get("location") as string
-    const imageFile = formData.get("image")
-    const file = imageFile instanceof File ? imageFile : null
+    // getAll() returns every selected file. An untouched input gives nothing
+    // useful, so we filter those out.
+    const imageFiles = formData
+      .getAll("images")
+      .filter((entry): entry is File => entry instanceof File && entry.size > 0)
 
     const validationError = getMenuItemError({
       itemName,
       description,
       price,
       location,
-      imageFile: file,
+      imageFile: imageFiles[0] ?? null,
       requireImage: false,
     })
     if (validationError) {
@@ -89,9 +92,16 @@ export function VendorMenuActions({ item, vendorId }: VendorMenuActionsProps) {
 
     setIsSaving(true)
     try {
-      // An empty file input still gives us a File with size 0, so check that.
-      const images =
-        file && file.size > 0 ? [await uploadImage(file)] : item.images
+      // No new files -> keep the existing images.
+      // New files -> upload each one and replace the list with their URLs.
+      let images = item.images
+      if (imageFiles.length > 0) {
+        const urls: string[] = []
+        for (const file of imageFiles) {
+          urls.push(await uploadImage(file))
+        }
+        images = urls
+      }
 
       await updateMenu(item._id, {
         vendorId,
@@ -167,8 +177,8 @@ export function VendorMenuActions({ item, vendorId }: VendorMenuActionsProps) {
           <DialogHeader>
             <DialogTitle>Edit menu item</DialogTitle>
             <DialogDescription>
-              Update the details below. Leave the image empty to keep the
-              current one.
+              Update the details below. Leave images empty to keep the current
+              ones. Choosing new images replaces all current images.
             </DialogDescription>
           </DialogHeader>
 
@@ -233,11 +243,13 @@ export function VendorMenuActions({ item, vendorId }: VendorMenuActionsProps) {
             />
 
             <AuthFormField
-              id={`image-${item._id}`}
-              name="image"
+              id={`images-${item._id}`}
+              name="images"
               type="file"
               accept="image/*"
-              label="New image (optional)"
+              multiple
+              label="New images (optional)"
+              description="Select one or more images. Leave empty to keep the current ones."
             />
 
             <DialogFooter>
