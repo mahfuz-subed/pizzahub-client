@@ -24,6 +24,7 @@ import { getMenuItemError } from "@/lib/menu-validator"
 import { authClient } from "@/lib/auth-client"
 import { getMenuCount } from "@/lib/api/menu"
 import { useRouter } from "next/navigation"
+import { getUserPremiumById } from "@/lib/api/users"
 
 export function AddMenuItemForm() {
   const [category, setCategory] = useState<MenuCategory>(MENU_CATEGORIES[0])
@@ -44,8 +45,10 @@ export function AddMenuItemForm() {
       return
     }
 
+    const premiumUser = await getUserPremiumById(userId)
+    const isPremium = premiumUser?.subscriptionPlan === "premium"
     const result = await getMenuCount(`vendorId=${userId}`)
-    if (result.count >= 3) {
+    if (!isPremium && result.count >= 3) {
       router.push("/payment")
       return
     }
