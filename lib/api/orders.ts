@@ -14,3 +14,12 @@ export const getMyOrders = async (customerId: string): Promise<Order[]> => {
   }
   return res.json()
 }
+
+export const getVendorOrders = async (vendorId: string): Promise<Order[]> => {
+  const res = await fetch(`${BASE_URL}/vendor-orders?vendorId=${vendorId}`)
+
+  if (!res.ok) {
+    throw new Error(`Could not load orders (status ${res.status}).`)
+  }
+  return res.json()
+}
