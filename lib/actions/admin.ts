@@ -1,12 +1,12 @@
 "use server"
 
-import { getSessionTokenFromHeaders } from "@/lib/auth-token"
+import { getServerToken } from "@/lib/auth-token"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"
 
 // Mutation helper - same Authorization header as the read API.
 async function adminAction(path: string, method: "PATCH" | "DELETE", body?: object) {
-  const token = await getSessionTokenFromHeaders()
+  const token = await getServerToken()
 
   const res = await fetch(`${BASE_URL}${path}`, {
     method,

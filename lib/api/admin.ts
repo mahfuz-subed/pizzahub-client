@@ -1,4 +1,4 @@
-import { getSessionTokenFromHeaders } from "@/lib/auth-token"
+import { getServerToken } from "@/lib/auth-token"
 import type { MenuItem } from "@/lib/menu-items"
 import type { Role } from "@/lib/roles"
 
@@ -6,7 +6,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"
 
 // Small helper so every admin request sends the same Authorization header.
 async function adminFetch(path: string, init?: RequestInit) {
-  const token = await getSessionTokenFromHeaders()
+  const token = await getServerToken()
 
   const res = await fetch(`${BASE_URL}${path}`, {
     ...init,
