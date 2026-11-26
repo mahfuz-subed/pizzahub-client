@@ -36,3 +36,21 @@ export const cancelOrder = async (id: string, customerId: string) => {
   }
   return result
 }
+
+//order status update
+
+export const updateOrderStatus = async (
+  orderId: string,
+  vendorId: string,
+  status: "accepted" | "rejected"
+) => {
+  const res = await fetch(`${BASE_URL}/update-order-status/${orderId}`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ vendorId, status }),
+  })
+
+  const result = await res.json()
+
+  return result
+}

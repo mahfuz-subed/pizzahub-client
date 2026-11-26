@@ -22,4 +22,6 @@ export interface OrderPayload {
 export interface Order extends Omit<OrderPayload, "status"> {
   _id: string
   status: OrderStatus
+  customerEmail?: string
+  price?: number
 }

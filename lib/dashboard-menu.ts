@@ -61,7 +61,7 @@ export const DASHBOARD_MENU_ITEMS: Record<Role, DashboardMenuItem[]> = {
     },
     {
       name: "Customer Orders",
-      url: "/dashboard/vendor/orders",
+      url: "/dashboard/vendor/customer-orders",
       icon: ClipboardList,
     },
     {
