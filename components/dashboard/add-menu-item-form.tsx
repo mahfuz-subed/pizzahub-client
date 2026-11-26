@@ -49,7 +49,7 @@ export function AddMenuItemForm() {
     const isPremium = premiumUser?.subscriptionPlan === "premium"
     const result = await getMenuCount(`vendorId=${userId}`)
     if (!isPremium && result.count >= 3) {
-      router.push("/payment")
+      router.push("/dashboard/vendor/subscription")
       return
     }
     const itemName = formData.get("itemName") as string
