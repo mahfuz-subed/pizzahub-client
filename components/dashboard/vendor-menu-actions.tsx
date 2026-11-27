@@ -128,7 +128,7 @@ export function VendorMenuActions({ item, vendorId }: VendorMenuActionsProps) {
   async function handleDelete() {
     setIsSaving(true)
     try {
-      await deleteMenu(item._id, vendorId)
+      await deleteMenu(item._id)
       toast.success("Menu item deleted.")
       router.refresh()
     } catch (error) {

@@ -1,4 +1,4 @@
-import type { CategoryCount, MenuItem, NewMenuItem } from "@/lib/menu-items"
+import type { CategoryCount, MenuItem } from "@/lib/menu-items"
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"
 
 export const getMenu = async (query = ""): Promise<MenuItem[]> => {
@@ -9,15 +9,6 @@ export const getMenu = async (query = ""): Promise<MenuItem[]> => {
   }
   return res.json()
 }
-export const getMenuCount = async (query = ""): Promise<{ count: number }> => {
-  const res = await fetch(`${BASE_URL}/add-menu/count?${query}`)
-
-  if (!res.ok) {
-    throw new Error(`Could not load the menu (status ${res.status}).`)
-  }
-  return res.json()
-}
-
 export const getMenuItem = async (id: string): Promise<MenuItem | null> => {
   const res = await fetch(`${BASE_URL}/menuDetails/${id}`)
 
@@ -26,17 +17,6 @@ export const getMenuItem = async (id: string): Promise<MenuItem | null> => {
   }
   if (!res.ok) {
     throw new Error(`Could not load the menu item (status ${res.status}).`)
-  }
-  return res.json()
-}
-
-export const getMyMenuItems = async (vendorId: string): Promise<MenuItem[]> => {
-  const res = await fetch(
-    `${BASE_URL}/my-menu-items?vendorId=${vendorId}` // always fetch fresh data, so new items show up
-  )
-
-  if (!res.ok) {
-    throw new Error(`Could not load your menu items (status ${res.status}).`)
   }
   return res.json()
 }

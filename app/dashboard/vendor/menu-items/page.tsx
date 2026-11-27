@@ -2,7 +2,7 @@ import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
 import { VendorMenuItemCard } from "@/components/dashboard/vendor-menu-item-card"
-import { getMyMenuItems } from "@/lib/api/menu"
+import { getMyMenuItems } from "@/lib/actions/menu"
 import { auth } from "@/lib/auth"
 
 export default async function MyMenuItemsPage() {
@@ -11,7 +11,7 @@ export default async function MyMenuItemsPage() {
     redirect("/sign-in")
   }
 
-  const items = await getMyMenuItems(session.user.id)
+  const items = await getMyMenuItems()
 
   return (
     <div>

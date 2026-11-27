@@ -15,7 +15,7 @@ const CustomerOrdersPage = async () => {
 
   let orders: Order[]
   try {
-    orders = await getVendorOrders(userId)
+    orders = await getVendorOrders()
   } catch {
     return (
       <StateMessage

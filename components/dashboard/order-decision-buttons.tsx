@@ -6,16 +6,14 @@ import { toast } from "react-hot-toast"
 import { Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { updateOrderStatus } from "@/lib/actions/orders"
+import { updateOrderStatus } from "@/lib/actions/vendor-orders"
 
 interface OrderDecisionButtonsProps {
   orderId: string
-  vendorId: string
 }
 
 export function OrderDecisionButtons({
   orderId,
-  vendorId,
 }: OrderDecisionButtonsProps) {
   const router = useRouter()
   // Remembers which button was clicked while we wait for the server
@@ -27,7 +25,7 @@ export function OrderDecisionButtons({
   async function handleDecision(status: "accepted" | "rejected") {
     setLoadingStatus(status)
     try {
-      await updateOrderStatus(orderId, vendorId, status)
+      await updateOrderStatus(orderId, status)
       toast.success(
         status === "accepted" ? "Order accepted." : "Order rejected."
       )

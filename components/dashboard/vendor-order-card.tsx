@@ -76,7 +76,7 @@ export function VendorOrderCard({ order, vendorId }: VendorOrderCardProps) {
         {/* Only pending orders can be accepted or rejected */}
         {order.status === "pending" && (
           <div className="mt-auto pt-2">
-            <OrderDecisionButtons orderId={order._id} vendorId={vendorId} />
+            <OrderDecisionButtons orderId={order._id} />
           </div>
         )}
       </div>

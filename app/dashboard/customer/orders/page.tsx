@@ -16,7 +16,7 @@ export default async function CustomerOrdersPage() {
   let orders: Order[] = []
   let hasError = false
   try {
-    orders = await getMyOrders(session.user.id)
+    orders = await getMyOrders()
   } catch {
     hasError = true
   }
@@ -47,11 +47,7 @@ export default async function CustomerOrdersPage() {
       ) : (
         <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {orders.map((order) => (
-            <CustomerOrderCard
-              key={order._id}
-              order={order}
-              customerId={session.user.id}
-            />
+            <CustomerOrderCard key={order._id} order={order} />
           ))}
         </div>
       )}

@@ -24,16 +24,21 @@ async function adminAction(path: string, method: "PATCH" | "DELETE", body?: obje
   return result
 }
 
-export const changeUserRole = (id: string, role: "vendor" | "customer") =>
-  adminAction(`/users/${id}/role`, "PATCH", { role })
+export async function changeUserRole(id: string, role: "vendor" | "customer") {
+  return adminAction(`/users/${id}/role`, "PATCH", { role })
+}
 
-export const setUserBlocked = (id: string, isBlocked: boolean) =>
-  adminAction(`/users/${id}/block`, "PATCH", { isBlocked })
+export async function setUserBlocked(id: string, isBlocked: boolean) {
+  return adminAction(`/users/${id}/block`, "PATCH", { isBlocked })
+}
 
-export const setMenuItemStatus = (
+export async function setMenuItemStatus(
   id: string,
   status: "approved" | "rejected" | "inactive"
-) => adminAction(`/admin/menu-items/${id}/status`, "PATCH", { status })
+) {
+  return adminAction(`/admin/menu-items/${id}/status`, "PATCH", { status })
+}
 
-export const deleteMenuItem = (id: string) =>
-  adminAction(`/admin/menu-items/${id}`, "DELETE")
+export async function deleteMenuItem(id: string) {
+  return adminAction(`/admin/menu-items/${id}`, "DELETE")
+}

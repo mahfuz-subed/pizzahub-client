@@ -1,6 +1,7 @@
 import { inferAdditionalFields, jwtClient } from "better-auth/client/plugins"
 import { createAuthClient } from "better-auth/react"
-import { auth } from "./auth"
+// Type-only: importing auth as a value would pull MongoDB into the browser bundle.
+import type { auth } from "./auth"
 export const authClient = createAuthClient({
   /** The base URL of the server (optional if you're using the same domain) */
   baseURL: "http://localhost:3000",

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 
 import { Button } from "@/components/ui/button"
-import { cancelOrder } from "@/lib/actions/orders"
+import { cancelOrder } from "@/lib/actions/customer-orders"
 import type { Order, OrderStatus } from "@/lib/orders"
 import { cn } from "@/lib/utils"
 
@@ -22,13 +22,7 @@ function formatDate(value: string | undefined) {
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString()
 }
 
-export function CustomerOrderCard({
-  order,
-  customerId,
-}: {
-  order: Order
-  customerId: string
-}) {
+export function CustomerOrderCard({ order }: { order: Order }) {
   const router = useRouter()
   const [isCancelling, setIsCancelling] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
@@ -36,7 +30,7 @@ export function CustomerOrderCard({
   async function handleCancel() {
     setIsCancelling(true)
     try {
-      await cancelOrder(order._id, customerId)
+      await cancelOrder(order._id)
       toast.success("Order cancelled.")
       router.refresh()
     } catch (error) {
