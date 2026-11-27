@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react"
 
 import MenuCard from "@/components/home/menu-card"
 import { FadeIn } from "@/components/shared/fade-in"
-import { getPublicMenuItems } from "@/lib/api/menu"
+import { getPremiumVendorIds, getPublicMenuItems } from "@/lib/api/menu"
 import type { MenuItem } from "@/lib/menu-items"
 
 const linkButtonClasses =
@@ -12,14 +12,27 @@ const linkButtonClasses =
 /** Homepage section showing up to 6 approved items. */
 export default async function FeaturedMenu() {
   let items: MenuItem[] = []
+  let premiumIds: string[] = []
 
   try {
     // The server already returns only approved items.
-    items = (await getPublicMenuItems()).slice(0, 6)
+    ;[items, premiumIds] = await Promise.all([
+      getPublicMenuItems(),
+      getPremiumVendorIds(),
+    ])
+
+    // Premium items go first - that is the "featured placement" perk.
+    const premium = new Set(premiumIds)
+    items = [...items].sort(
+      (a, b) => Number(premium.has(b.vendorId)) - Number(premium.has(a.vendorId))
+    )
+    items = items.slice(0, 6)
   } catch {
     // If the API is down, show a friendly message instead of breaking the page.
     items = []
   }
+
+  const premiumSet = new Set(premiumIds)
 
   return (
     <section className="border-b border-border py-14 sm:py-20">
@@ -57,7 +70,7 @@ export default async function FeaturedMenu() {
                 delay={(index % 3) * 0.1}
                 className="h-full"
               >
-                <MenuCard item={item} />
+                <MenuCard item={item} isPremium={premiumSet.has(item.vendorId)} />
               </FadeIn>
             ))}
           </div>

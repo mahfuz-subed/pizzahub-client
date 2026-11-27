@@ -33,6 +33,17 @@ export const getPublicMenuItems = async (): Promise<MenuItem[]> => {
   return res.json()
 }
 
+// Vendor ids with Premium - used to mark and prioritise their items.
+export const getPremiumVendorIds = async (): Promise<string[]> => {
+  const res = await fetch(`${BASE_URL}/premium-vendors`, {
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    throw new Error(`Could not load Premium vendors (status ${res.status}).`)
+  }
+  return res.json()
+}
+
 export const getCategoryCounts = async (): Promise<CategoryCount[]> => {
   const res = await fetch(`${BASE_URL}/menu/categories`, {
     cache: "no-store",

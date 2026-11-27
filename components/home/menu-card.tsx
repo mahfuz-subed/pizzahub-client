@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { MapPin, Store } from "lucide-react"
+import { Crown, MapPin, Store } from "lucide-react"
 
 import type { MenuItem } from "@/lib/menu-items"
 
@@ -8,7 +8,13 @@ const buttonLinkClasses =
   "inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
 
 /** One public menu card. All the data it needs is passed in as a prop. */
-export default function MenuCard({ item }: { item: MenuItem }) {
+export default function MenuCard({
+  item,
+  isPremium = false,
+}: {
+  item: MenuItem
+  isPremium?: boolean
+}) {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
       <div className="relative">
@@ -42,6 +48,11 @@ export default function MenuCard({ item }: { item: MenuItem }) {
           <span className="truncate">
             {item.vendorBusinessName || item.vendorName || "Local vendor"}
           </span>
+          {isPremium && (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-secondary px-2 py-0.5 text-[10px] font-bold text-secondary-foreground">
+              <Crown className="size-3" /> Premium
+            </span>
+          )}
         </div>
 
         <div className="mt-auto flex items-center justify-between gap-3 pt-3">
