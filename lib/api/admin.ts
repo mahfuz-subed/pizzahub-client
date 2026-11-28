@@ -43,13 +43,14 @@ export interface AdminUser {
 
 export interface AdminTransaction {
   _id: string
-  userId: string
-  sessionId?: string
+  vendorId: string
+  plan: string
+  amount: number | null
+  currency: string | null
+  stripeSessionId: string | null
+  stripeSubscriptionId: string | null
   status: string
-  payment_status: string
-  amount_total?: number
-  currency?: string
-  createdAt?: string
+  createdAt: string
 }
 
 export const getAdminOverview = () =>

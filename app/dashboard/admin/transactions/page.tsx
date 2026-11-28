@@ -48,7 +48,7 @@ export default async function TransactionsPage() {
               </thead>
               <tbody className="divide-y">
                 {transactions.map((item) => {
-                  const vendor = vendors.get(item.userId)
+                  const vendor = vendors.get(item.vendorId)
                   return (
                     <tr key={item._id}>
                       <td className="px-4 py-3">
@@ -56,17 +56,17 @@ export default async function TransactionsPage() {
                           {vendor?.name ?? "Unknown vendor"}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {vendor?.email ?? item.userId}
+                          {vendor?.email ?? item.vendorId}
                         </p>
                       </td>
                       <td className="px-4 py-3 capitalize">Premium</td>
                       <td className="px-4 py-3">
-                        {item.amount_total !== undefined
-                          ? `${(item.amount_total / 100).toFixed(2)} ${(item.currency ?? "usd").toUpperCase()}`
+                        {item.amount !== null && item.amount !== undefined
+                          ? `${(item.amount / 100).toFixed(2)} ${(item.currency ?? "usd").toUpperCase()}`
                           : "-"}
                       </td>
                       <td className="px-4 py-3 capitalize">
-                        {item.payment_status ?? item.status}
+                        {item.status}
                       </td>
                       <td className="px-4 py-3 text-muted-foreground">
                         {item.createdAt
