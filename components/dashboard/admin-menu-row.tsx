@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { Loader2 } from "lucide-react"
 
+import { SafeImage } from "@/components/shared/safe-image"
 import { Button } from "@/components/ui/button"
 import { deleteMenuItem, setMenuItemStatus } from "@/lib/actions/admin"
 import type { MenuItem } from "@/lib/menu-items"
@@ -36,8 +37,7 @@ export function AdminMenuRow({ item }: { item: MenuItem }) {
 
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-lg border bg-card p-4">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <SafeImage
         src={item.images[0]}
         alt={item.itemName}
         className="size-14 shrink-0 rounded-lg object-cover"

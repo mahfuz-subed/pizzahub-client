@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { MapPin, Store } from "lucide-react"
 
+import { SafeImage } from "@/components/shared/safe-image"
 import { buttonVariants } from "@/components/ui/button"
 import type { MenuItem } from "@/lib/menu-items"
 import { cn } from "@/lib/utils"
@@ -11,8 +12,7 @@ export function MenuItemCard({ item }: { item: MenuItem }) {
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <SafeImage
         src={item.images[0]}
         alt={item.itemName}
         className="aspect-[4/3] w-full object-cover"

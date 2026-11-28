@@ -3,6 +3,7 @@ import { CalendarDays, Mail, MapPin, MessageSquare, User } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 import { OrderDecisionButtons } from "@/components/dashboard/order-decision-buttons"
+import { SafeImage } from "@/components/shared/safe-image"
 import { OrderStatusBadge } from "@/components/shared/order-status-badge"
 import { formatDate } from "@/lib/dates"
 import type { Order } from "@/lib/orders"
@@ -31,16 +32,11 @@ interface VendorOrderCardProps {
 export function VendorOrderCard({ order, vendorId }: VendorOrderCardProps) {
   return (
     <div className="flex flex-col gap-4 rounded-xl border bg-card p-4 text-card-foreground shadow-sm sm:flex-row">
-      {order.itemImage && (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={order.itemImage}
-            alt={order.itemName}
-            className="aspect-[4/3] w-full rounded-lg object-cover sm:w-44"
-          />
-        </>
-      )}
+      <SafeImage
+        src={order.itemImage}
+        alt={order.itemName}
+        className="aspect-[4/3] w-full rounded-lg object-cover sm:w-44"
+      />
 
       <div className="flex flex-1 flex-col gap-2">
         <div className="flex items-start justify-between gap-2">

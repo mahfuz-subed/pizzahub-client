@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 
+import { SafeImage } from "@/components/shared/safe-image"
 import { Button } from "@/components/ui/button"
 import { cancelOrder } from "@/lib/actions/customer-orders"
 import type { Order, OrderStatus } from "@/lib/orders"
@@ -44,18 +45,11 @@ export function CustomerOrderCard({ order }: { order: Order }) {
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
-      {order.itemImage ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={order.itemImage}
-          alt={order.itemName}
-          className="aspect-[4/3] w-full object-cover"
-        />
-      ) : (
-        <div className="flex aspect-[4/3] w-full items-center justify-center bg-muted text-sm text-muted-foreground">
-          No image available
-        </div>
-      )}
+      <SafeImage
+        src={order.itemImage}
+        alt={order.itemName}
+        className="aspect-[4/3] w-full object-cover"
+      />
 
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex items-start justify-between gap-2">

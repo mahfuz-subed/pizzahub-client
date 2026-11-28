@@ -1,4 +1,5 @@
 import { VendorMenuActions } from "@/components/dashboard/vendor-menu-actions"
+import { SafeImage } from "@/components/shared/safe-image"
 import type { MenuItem, MenuItemStatus } from "@/lib/menu-items"
 
 // Badge colors for each status
@@ -20,8 +21,7 @@ export function VendorMenuItemCard({
 }: VendorMenuItemCardProps) {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <SafeImage
         src={item.images[0]}
         alt={item.itemName}
         className="aspect-[4/3] w-full object-cover"

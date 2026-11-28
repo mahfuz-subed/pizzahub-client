@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Crown, MapPin, Store } from "lucide-react"
 
+import { SafeImage } from "@/components/shared/safe-image"
 import type { MenuItem } from "@/lib/menu-items"
 
 // Same button style used on the banner and navbar.
@@ -18,8 +19,7 @@ export default function MenuCard({
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm">
       <div className="relative">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SafeImage
           src={item.images[0]}
           alt={item.itemName}
           className="aspect-[4/3] w-full object-cover"
