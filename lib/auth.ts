@@ -1,9 +1,11 @@
 import { betterAuth } from "better-auth"
 import { jwt } from "better-auth/plugins"
-import { MongoClient } from "mongodb"
 import { mongodbAdapter } from "@better-auth/mongo-adapter"
 
-const client = new MongoClient(process.env.MONGODB_URI as string)
+import { getMongoClient } from "@/lib/mongodb"
+
+// One connected client reused across warm Vercel invocations.
+const client = await getMongoClient()
 const db = client.db("pizzahubDB")
 
 export const auth = betterAuth({

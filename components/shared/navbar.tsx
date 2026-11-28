@@ -15,6 +15,7 @@ import {
 
 import Logo from "@/components/logo"
 import { authClient } from "@/lib/auth-client"
+import { DASHBOARD_MENU_ITEMS } from "@/lib/dashboard-menu"
 import { getDashboardPath } from "@/lib/roles"
 import type { Role } from "@/lib/roles"
 import { cn } from "@/lib/utils"
@@ -79,7 +80,11 @@ export default function Navbar() {
   const role: Role =
     user?.role === "vendor" || user?.role === "admin" ? user.role : "customer"
   const dashboardPath = getDashboardPath(role)
-  const settingsPath = `${dashboardPath}/settings`
+  // Use the same URL as the sidebar. Admin has no profile page, so this is
+  // undefined for admin and the link is not rendered.
+  const settingsPath = DASHBOARD_MENU_ITEMS[role].find(
+    (item) => item.name === "Profile Settings"
+  )?.url
   const navLinks: NavLink[] = user
     ? [...publicLinks, roleLinks[role]]
     : publicLinks
@@ -178,14 +183,16 @@ export default function Navbar() {
                   >
                     <LayoutDashboard className="size-4" /> Dashboard
                   </Link>
-                  <Link
-                    href={settingsPath}
-                    role="menuitem"
-                    onClick={closeProfile}
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary/10"
-                  >
-                    <Settings className="size-4" /> Profile Settings
-                  </Link>
+                  {settingsPath && (
+                    <Link
+                      href={settingsPath}
+                      role="menuitem"
+                      onClick={closeProfile}
+                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors hover:bg-secondary/10"
+                    >
+                      <Settings className="size-4" /> Profile Settings
+                    </Link>
+                  )}
                   <button
                     type="button"
                     role="menuitem"
@@ -266,13 +273,15 @@ export default function Navbar() {
                 >
                   <LayoutDashboard className="size-4" /> Dashboard
                 </Link>
-                <Link
-                  href={settingsPath}
-                  onClick={closeMenu}
-                  className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary/10"
-                >
-                  <Settings className="size-4" /> Profile Settings
-                </Link>
+                {settingsPath && (
+                  <Link
+                    href={settingsPath}
+                    onClick={closeMenu}
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary/10"
+                  >
+                    <Settings className="size-4" /> Profile Settings
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={handleSignOut}
