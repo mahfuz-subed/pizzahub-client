@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react"
 import type Stripe from "stripe"
 
 import { StateMessage } from "@/components/shared/state-message"
-import { checkoutVerify } from "@/lib/actions/payments"
+
 import { stripe } from "@/lib/stripe"
 
 export default async function PaymentSuccessPage({
@@ -64,15 +64,6 @@ export default async function PaymentSuccessPage({
     )
   }
 
-  // Confirm with our server, which saves the transaction and upgrades the plan.
-  let verified = false
-  try {
-    const result = await checkoutVerify(session_id)
-    verified = Boolean(result?.success)
-  } catch {
-    // The payment is still real - a failed verification just needs a retry.
-  }
-
   return (
     <section className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-xl">
@@ -82,11 +73,11 @@ export default async function PaymentSuccessPage({
           </span>
 
           <h1 className="mt-5 font-heading text-3xl font-extrabold tracking-tight">
-            You&apos;re Premium!
+            Payment Successful!
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Your subscription is active. You can now publish unlimited menu
-            items and your shop gets a Premium badge.
+            Thank you for subscribing to PizzaHub Premium. We're activating your
+            subscription now. Your Premium features will be available shortly.
           </p>
 
           <div className="mt-7 divide-y rounded-xl border bg-muted/30 px-4">
@@ -95,19 +86,14 @@ export default async function PaymentSuccessPage({
               <span className="text-sm font-semibold">PizzaHub Premium</span>
             </div>
             <div className="flex items-center justify-between gap-4 py-3">
-              <span className="text-sm text-muted-foreground">Receipt sent to</span>
+              <span className="text-sm text-muted-foreground">
+                Receipt sent to
+              </span>
               <span className="truncate text-sm font-semibold">
                 {session.customer_details?.email ?? "your email"}
               </span>
             </div>
           </div>
-
-          {!verified && (
-            <p className="mt-4 text-xs text-muted-foreground">
-              We are still confirming your subscription. Refresh this page in a
-              moment if the dashboard does not show Premium yet.
-            </p>
-          )}
 
           <Link
             href="/dashboard/vendor"

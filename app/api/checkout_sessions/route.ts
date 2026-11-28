@@ -33,6 +33,9 @@ export async function POST() {
       // Saved on the Stripe session so the verify route knows whose
       // subscription to upgrade after payment.
       metadata: { userId: userSession?.user.id },
+      subscription_data: {
+        metadata: { userId: userSession.user.id },
+      },
       success_url: `${origin}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/payment/cancel`,
       // Provide a name (for example, hosted_web_0001) to label this Checkout integration and measure its conversion independently
